@@ -1,5 +1,4 @@
-## Poiyomi 8 LTCGI Adapter Module
-#### by voxie 
+## Poiyomi 8 LTCGI Adapter Module by voxie
 
 ### Project Requirements
 * Latest VRCSDK Worlds 
@@ -9,7 +8,7 @@
 
 ### Installation
 Import into your project all project requirements in the order listed.   
-Import the Poi8LTCGIAdapterModule UnityPackage into your project.  
+Drop the Assets/ folder from this repository into your Project folder.
 In the toolbar, navigate to Poi->Tools->Modular Shader Generator  
 Select the checkbox for "Poiyomi ProLTCGI Adapter" and set the Destination to "Assets\_PoiyomiShaders\Shaders"  
 You can now use the shader named ".poiyomi/V8.0/ProLTCGIADapter" for your materials.
@@ -22,9 +21,23 @@ You can now use the shader named ".poiyomi/V8.0/ProLTCGIADapter" for your materi
 ### Example Scene
 Open the scene "Poi8LTCGIAdapterExample" in "Assets/Poi8LTCGIAdapter/Scenes" AFTER following the installation steps. Each sphere in the scene has an example material.
 
+### Known Limitations
+Lighting from LTCGI only works on meshes already in the world.
+Each material created needs a tag specified in the String Tag Map to be updated in editor. This must be done manually for now. See below for instructions.
+
+To set a material tag:
+* Select your material in the Project window
+* Change the inspector mode to Debug 
+* Add a slot to the String Tag Map
+* In the new slot, set First to "LTCGI" and Second to "ALWAYS"
+
+If you need to see an example, each example material has this tag already set.
+
 ### Links
-My Discord [https://voxie3d.com](https://voxie3d.com)
-My avatars for sale [https://app.gumroad.com/voxieavatars](https://app.gumroad.com/voxieavatars) and Booth [https://voxie.booth.pm](https://voxie.booth.pm)
+My Discord [https://voxie3d.com](https://voxie3d.com)  
+I make avatars, sold on Gumroad and Booth:  
+[https://app.gumroad.com/voxieavatars](https://app.gumroad.com/voxieavatars)  
+[https://voxie.booth.pm](https://voxie.booth.pm)  
 
 
 ### License
