@@ -1,6 +1,7 @@
 ## Poiyomi 8 LTCGI Adapter Module by voxie
 
 ### Project Requirements
+* Unity 2019.4.31f1
 * Latest VRCSDK Worlds 
 * UdonSharp by Merlin [https://github.com/vrchat-community/UdonSharp](https://github.com/vrchat-community/UdonSharp)
 * LTCGI by _pi [https://github.com/PiMaker/ltcgi](https://github.com/PiMaker/ltcgi)
