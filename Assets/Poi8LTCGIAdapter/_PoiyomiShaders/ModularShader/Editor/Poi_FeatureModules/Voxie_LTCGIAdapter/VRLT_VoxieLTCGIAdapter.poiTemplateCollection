@@ -28,7 +28,7 @@
     #ifdef LTCGI_ADAPTER
         void applyLTCGILighting(inout PoiFragData poiFragData, in PoiMesh poiMesh, in PoiCam poiCam) 
         {
-            float2 ltgci_lightmapuvs = float2(0,0);
+            float2 ltcgi_lightmapuvs = float2(0,0);
             float roughness = _LTCGIAdapterRoughness;
             half3 diffuse = 0;
             half3 specular = 0;
@@ -37,8 +37,8 @@
                 , specular
             #endif
             );
-            poiFragData.finalColor += _LTCGIAdapterEnabled * (diff * _LTCGIAdapterIntensityMult);
-            poiFragData.finalColor += _LTCGIAdapterEnabled * (spec * _LTCGIAdapterIntensityMult);
+            poiFragData.finalColor += _LTCGIAdapterEnabled * (diffuse * _LTCGIAdapterIntensityMult);
+            poiFragData.finalColor += _LTCGIAdapterEnabled * (specular * _LTCGIAdapterIntensityMult);
         }
     #endif
 
