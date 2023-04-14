@@ -1,0 +1,49 @@
+#T#PoiLTCGIAdapterProperties
+    [HideInInspector] m_start_ltcgiAdapter ("LTCGI Adapter--{reference_property:_LTCGIAdapter}", Float) = 0
+    [HideInInspector][ThryToggle(LTCGI_ADAPTER)]_LTCGIAdapter("Enable", Float) = 0
+
+    [ToggleUI(true)]_LTCGIAdapterEnabled ("LTCGI Enabled", Float) = 0
+    _LTCGIAdapterIntensityMult ("Intensity Multiplier", Range(0,2)) = 0.5
+    _LTCGIAdapterRoughness ("Roughness Multiplier", Range(0,1)) = 0.5
+
+    [HideInInspector] m_end_ltcgiAdapter ("", Float) = 0
+
+#T#PoiLTCGIAdapterTags
+//    Tags { "LightMode" = "ForwardAdd" "LTCGI" = "ALWAYS"}
+    Tags { "LightMode" = "ForwardBase" "LTCGI" = "ALWAYS"}
+//    Tags { "LightMode" = "ForwardAdd" "LTCGI" = "_LTCGIAdapter"}
+
+#T#PoiLTCGIAdapterKeywords
+    #pragma shader_feature_local LTCGI_ADAPTER
+
+#T#PoiLTCGIAdapterVariables
+    #ifdef LTCGI_ADAPTER
+        #include "Assets/_pi_/_LTCGI/Shaders/LTCGI.cginc"
+        float _LTCGIAdapterEnabled;
+        float _LTCGIAdapterIntensityMult;
+        float _LTCGIAdapterRoughness;
+    #endif
+
+#T#PoiLTCGIAdapterFunctions
+    #ifdef LTCGI_ADAPTER
+        void applyLTCGILighting(inout PoiFragData poiFragData, in PoiMesh poiMesh, in PoiCam poiCam) 
+        {
+            float2 ltcgi_lightmapuvs = float2(0,0);
+            float roughness = _LTCGIAdapterRoughness;
+            half3 diffuse = 0;
+            half3 specular = 0;
+            LTCGI_Contribution(poiMesh.worldPos, poiMesh.normals[1], poiCam.viewDir, _LTCGIAdapterRoughness, ltcgi_lightmapuvs, diffuse
+            #ifndef LTCGI_SPECULAR_OFF
+                , specular
+            #endif
+            );
+            poiFragData.finalColor += _LTCGIAdapterEnabled * (diffuse * _LTCGIAdapterIntensityMult);
+            poiFragData.finalColor += _LTCGIAdapterEnabled * (specular * _LTCGIAdapterIntensityMult);
+        }
+    #endif
+
+#T#PoiLTCGIAdapterFunctionCalls
+    #ifdef LTCGI_ADAPTER
+        applyLTCGILighting(poiFragData, poiMesh, poiCam);
+    #endif
+
